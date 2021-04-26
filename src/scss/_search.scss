@@ -1,0 +1,256 @@
+$blue: #006cb4;
+$orange: #f47920;
+
+.mb-1 {
+  margin-bottom: .25rem;
+}
+.mb-2 {
+  margin-bottom: .5rem;
+}
+.mb-3 {
+  margin-bottom: .75rem;
+}
+
+.relative {
+  position: relative;
+}
+
+@mixin screen($size) {
+  @if $size == mobile {
+    @media (max-width: 500px) { @content; }
+  } @else if $size == 768 {
+    @media (min-width: 768px) { @content; }
+  } @else if $size == 992 {
+    @media (min-width: 992px) { @content; }
+  } @else if $size == 1200 {
+    @media (min-width: 1200px) { @content; }
+  } @else if $size == 1600 {
+    @media (min-width: 1600px) { @content; }
+  }
+  @else {
+    @media (min-width: #{$size}px) { @content; }
+  }
+}
+
+@mixin min-width($size) {
+  @media (min-width: #{$size}px) { @content; }
+}
+
+@mixin max-width($size) {
+  @media (max-width: #{$size}px) { @content; }
+}
+
+.wbctz-ymm-search {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    @include screen(768) {
+      flex-direction: row;
+    }
+  }
+  &__clear-btn {
+    position: absolute;
+    top: -6px;
+    padding: .25rem;
+    font-size: 12px;
+    right: -14px;
+    opacity: .32;
+  }
+  &__pagination {
+    width: 100%;
+
+    &.is-bottom {
+      @include screen(768) {
+        text-align: right;
+      }
+    }
+    &.is-top {
+      align-self: center;
+      
+      @include screen(768) {
+        margin-left: auto;
+        width: auto;
+      }
+    }
+  }
+  &__results {
+    position: relative;
+    min-height: 220px;
+    .table {
+      margin-top: .5rem;
+      tbody {
+        tr:nth-child(odd) {
+          td {
+            background-color: #f9f9f9;
+          }
+        }
+      }
+      th {
+        &[data-col="1"] {
+          width: 20%;
+        }
+        &[data-col="2"] {
+          width: 30%;
+        }
+        &[data-col="4"] {
+          width: 35%;
+        }
+        &.is-sortable {
+          cursor: pointer;
+          span {
+            margin-left: 2px;
+          }
+          i {
+            font-size: 10px;
+            opacity: .4;
+            &.active {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__dropdowns {
+      display: flex;
+  }
+  &__no-results {
+    font-size: 1.8rem;
+    opacity: .35;
+    font-style: italic;
+    font-weight: 600;
+    
+  }
+  &__empty-container {
+    padding-top: 3rem;
+    .search-terms {
+      font-size: 1rem;
+      opacity: 1;
+      margin-top: .875rem;
+    }
+  }
+}
+
+.wbctz-pagination {
+  width: 100%;
+  max-width: 600px;
+  @include screen(768) {
+    width: auto;
+  }
+  display: inline-flex;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.wbctz-input-row {
+    width: 33.3333%;
+    .input--select {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        line-height: 1.43;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-image: none;
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        &:disabled, &[disabled] {
+            cursor: not-allowed;
+            background-color: #eee;
+            opacity: 1;
+        }
+    }
+    &:not(:last-child) {
+        padding-right: 12px;
+    }
+}
+
+
+
+.wbctz-pagination-results {
+  padding: .35rem .75rem;
+  text-align: center;
+  font-weight: 500;
+  flex-grow: 1;
+  @include screen(768) {
+    min-width: 155px;
+  }
+}
+
+.wbctz-pagination-btn {
+  display: block;
+  cursor: pointer;
+  padding: .35rem .75rem;
+  &--next, &--prev {
+    padding: .35rem .75rem;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    color: $blue;
+    font-size: 11px;
+    &:hover {
+      background-color: #eee;
+    }
+  }
+  &--next, &--last {
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.wbctz-ymm-search__searching-for-item {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.wbctz-ymm-search__searching-for {
+    margin-bottom: 1rem;
+    text-align: center;
+    @include screen(768) {
+      text-align: left;
+    }
+}
+
+.ymm-searching-for {
+    &--year, &--make {
+        margin-right: 5.5px;
+    }
+}
+
+.wbctz-ymm-search__loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background-color: #fff;
+}
+
+.wbctz-ymm-search__loader {
+  display: inline-block;
+  width: 50;
+  height: 50px;
+}
+.wbctz-ymm-search__loader::after {
+  content: " ";
+  display: block;
+  width: 35px;
+  height: 35px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #333;
+  border-color: #333 transparent #333 transparent;
+  animation: lds-dual-ring .85s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
